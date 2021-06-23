@@ -1,0 +1,31 @@
+<form [formGroup]="formGroup" class="login100-form validate-form" (submit)="formGroup.valid && onSubmit()">
+				<span class="login100-form-title">
+					Identifiant
+				</span>
+
+  <div class="text-danger text-center p-b-20 errorMessage" [ngClass]="{'dis-none' : formGroup.touched}">{{ errorMessage }}</div>
+
+  <div class="wrap-input100 validate-input" data-validate="Login obligatoire"
+       [ngClass]="{'alert-validate' : login.touched && login.invalid}">
+    <input class="input100" type="text" name="login" placeholder="Login" formControlName="login">
+    <span class="focus-input100"></span>
+    <span class="symbol-input100">
+						<i class="nc-icon nc-circle-10 fs-23" aria-hidden="true"></i>
+					</span>
+  </div>
+
+  <div class="wrap-input100 validate-input" data-validate="Mot de passe obligatoire"
+       [ngClass]="{'alert-validate' : password.touched && password.invalid}">
+    <input class="input100" type="password" name="password" placeholder="Mot de passe" formControlName="password">
+    <span class="focus-input100"></span>
+    <span class="symbol-input100">
+							<i class="nc-icon nc-key-25 fs-23 mr-5" aria-hidden="true"></i>
+						</span>
+  </div>
+
+  <div class="container-login100-form-btn">
+    <button class="login100-form-btn" type="submit">
+      Connexion <img class="m-l-10" *ngIf="isLoading" src="assets/img/svg/loader.svg" alt="loader">
+    </button>
+  </div>
+</form>
