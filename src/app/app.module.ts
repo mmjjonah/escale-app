@@ -1,4 +1,4 @@
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -8,6 +8,7 @@ import {AdminGuard} from './guard/admin.guard';
 
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
+import {ErrorInterceptor} from './layouts/admin-layout/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AppRoutes } from './app.routing';
     FormsModule
   ],
   providers: [
-    AdminGuard
+    AdminGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
