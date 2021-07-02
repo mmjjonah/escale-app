@@ -73,6 +73,27 @@
         </div>
       </div>
 
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="montant_total">Montant total</label>
+          <input type="number" class="form-control" id="montant_total" readonly [value]="montant_total | number: '1.2-2':'fr'">
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="montant_a_compte">À compte</label>
+          <input type="number" class="form-control" (input)="onChangeMontantAcompte($event)" id="montant_a_compte" formControlName="montant_a_compte">
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="montant_reste_payer">Reste à payer</label>
+          <input type="number" class="form-control" id="montant_reste_payer" readonly [value]="montant_reste_payer | number: '1.2-2':'fr'">
+        </div>
+      </div>
+
       <div class="col-md-12 mt-3">
         <div class="row">
           <h6 class="col-md-6">Liste des gateaux</h6>

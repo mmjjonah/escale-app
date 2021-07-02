@@ -17,6 +17,8 @@ export class ModalSingleCommandComponent implements OnInit {
   displayedColumns = ['id', 'nb_pax', 'forme', 'model', 'montant', 'action']
   fg: FormGroup
   _c = _c
+  montant_total = 0
+  montant_reste_payer = 0
 
   constructor(
     private matDialog: MatDialog,
@@ -26,6 +28,10 @@ export class ModalSingleCommandComponent implements OnInit {
   ) { }
 
   get user(): User { return this.session$.getUserSession }
+
+  onChangeMontantAcompte(event) {
+    this.montant_reste_payer = this.montant_total - parseInt(event.target.value, 10)
+  }
 
   supprimerGateau(id: number) {
     this.tools$.confirm({
@@ -50,6 +56,10 @@ export class ModalSingleCommandComponent implements OnInit {
             result
           ]
           console.log(result)
+          this.montant_total = 0
+          this.listGateaux.map((el) => {
+            this.montant_total += parseInt(el.gateau_montant_total, 10)
+          })
           this.fg.get('list_gateaux').setValue(this.listGateaux)
         }
       })
@@ -66,6 +76,7 @@ export class ModalSingleCommandComponent implements OnInit {
       client_contact: new FormControl('', [Validators.required]),
       command_date_livraison: new FormControl('', [Validators.required]),
       command_evenement: new FormControl('', [Validators.required]),
+      montant_a_compte: new FormControl('', []),
       list_gateaux: new FormControl('', [Validators.required]),
     })
   }
