@@ -1,7 +1,8 @@
+import {registerLocaleData} from '@angular/common';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
 import {AdminGuard} from './guard/admin.guard';
@@ -9,6 +10,9 @@ import {AdminGuard} from './guard/admin.guard';
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
 import {ErrorInterceptor} from './layouts/admin-layout/error.interceptor';
+import localeFr from '@angular/common/locales/fr';
+import {SecurityInterceptor} from './layouts/admin-layout/security.interceptor';
+registerLocaleData(localeFr);
 
 @NgModule({
   declarations: [
@@ -17,7 +21,7 @@ import {ErrorInterceptor} from './layouts/admin-layout/error.interceptor';
   imports: [
     BrowserAnimationsModule,
     RouterModule.forRoot(AppRoutes, {
-      useHash: true
+      useHash: false
     }),
     ToastrModule.forRoot(),
     HttpClientModule,
@@ -26,7 +30,9 @@ import {ErrorInterceptor} from './layouts/admin-layout/error.interceptor';
   ],
   providers: [
     AdminGuard,
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    // { provide: HTTP_INTERCEPTORS, useValue: SecurityInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: LOCALE_ID, useValue: 'fr-FR'},
   ],
   bootstrap: [AppComponent]
 })

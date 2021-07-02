@@ -1,0 +1,23 @@
+<div class="card">
+  <div class="card-header">
+    <h4 class="card-title">Liste des clients</h4>
+  </div>
+  <div class="card-body ml-3 mr-3">
+    <div class="row">
+      <div class="col-md-5">
+        <!--        <mat-form-field>-->
+        <!--          <mat-label>Rechercher</mat-label>-->
+        <!--          <input matInput (keyup)="applyFilter($event)" #input>-->
+        <!--        </mat-form-field>-->
+      </div>
+      <div class="col-md-7">
+        <!-- Bouton actions -->
+        <button class="btn btn-outline-info pull-right">Créer</button>
+      </div>
+    </div>
+    <div class="table-responsive">
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+  </div>
+</div>

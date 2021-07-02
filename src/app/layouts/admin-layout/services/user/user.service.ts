@@ -20,4 +20,10 @@ export class UserService {
   createUser(data: User): Observable<ApiRes> {
     return this.http.post<ApiRes>(api.api_url + endpoints.users, data);
   }
+  updateUser(pk: number, data: any): Observable<ApiRes> {
+    return this.http.patch<ApiRes>(api.api_url + endpoints.users + '/' + pk, data)
+  }
+  deleteUser(pk: number): Observable<ApiRes> {
+    return this.http.delete<ApiRes>(api.api_url + endpoints.users + '/' + pk)
+  }
 }

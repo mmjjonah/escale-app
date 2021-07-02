@@ -3,7 +3,7 @@
   <div class="logo">
     <a href="#" class="simple-text logo-mini">
       <div class="logo-image-small">
-        <img src="assets/img/logo.gif">
+        <img alt="logo" src="assets/img/logo.gif">
       </div>
     </a>
     <a href="#" class="simple-text logo-normal">
@@ -11,13 +11,15 @@
     </a>
   </div>
     <ul class="nav">
-        <li *ngFor="let menuItem of menuItems" routerLinkActive="active" class="{{menuItem.class}}">
+      <ng-container *ngFor="let menuItem of menuItems">
+        <li *ngIf="menuItem.roles.includes(user.user_group)" (click)="this.dialogRef.closeAll()" routerLinkActive="active" class="{{menuItem.class}}">
             <a [routerLink]="[menuItem.path]">
                 <i class="nc-icon {{menuItem.icon}}"></i>
                 <p>{{menuItem.title}}</p>
             </a>
         </li>
-        <li class="active-pro">
+      </ng-container>
+        <li class="active-pro" (click)="this.dialogRef.closeAll()">
             <a href="javascript:void(0)" (click)="logout()">
                 <i class="nc-icon nc-button-power"></i>
                 <p>Se déconnecter</p>

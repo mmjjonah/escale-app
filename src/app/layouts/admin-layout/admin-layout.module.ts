@@ -1,9 +1,8 @@
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -13,10 +12,15 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AccountComponent} from '../../pages/account/account.component';
 import {ModalEditPasswordComponent} from '../../pages/account/modal-edit-password/modal-edit-password.component';
 import {ModalSingleAccountComponent} from '../../pages/account/modal-single-account/modal-single-account.component';
+import {ClientComponent} from '../../pages/client/client.component';
+import {CommandComponent} from '../../pages/command/command.component';
+import {ModalSingleCommandComponent} from '../../pages/command/modal-single-command/modal-single-command.component';
+import {ModalSingleGateauComponent} from '../../pages/command/modal-single-command/modal-single-gateau/modal-single-gateau.component';
 import {OperatorComponent} from '../../pages/operator/operator.component';
 import {FixedPluginModule} from '../../shared/fixedplugin/fixedplugin.module';
 import {FooterModule} from '../../shared/footer/footer.module';
 import {NavbarModule} from '../../shared/navbar/navbar.module';
+import {getFrenchPaginatorIntl} from '../../shared/paginator/french-paginator-intl';
 import {ToolsService} from '../../shared/services/tools/tools.service';
 import {SidebarModule} from '../../sidebar/sidebar.module';
 import {AdminLayoutComponent} from './admin-layout.component';
@@ -66,10 +70,15 @@ import {UserService} from './services/user/user.service';
     AccountComponent,
     ModalSingleAccountComponent,
     ModalEditPasswordComponent,
+    CommandComponent,
+    ClientComponent,
+    ModalSingleCommandComponent,
+    ModalSingleGateauComponent,
   ],
   providers: [
     UserService,
     ToolsService,
+    { provide: MatPaginatorIntl, useValue: getFrenchPaginatorIntl() },
   ]
 })
 

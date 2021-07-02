@@ -6,7 +6,7 @@ import {User} from '../../interfaces/user';
 })
 export class SessionService {
   private tokenKey = '__escale_jwt';
-  private userKey = '__user';
+  private userKey = '__escale_user';
   private storage: Storage = localStorage;
 
   constructor() { }
@@ -20,5 +20,9 @@ export class SessionService {
   }
   get getUserSession(): User {
     return JSON.parse(this.storage.getItem(this.userKey));
+  }
+
+  get token() {
+    return this.storage.getItem(this.tokenKey)
   }
 }

@@ -1,0 +1,143 @@
+<h4 mat-dialog-title>Création gateau</h4>
+<form [formGroup]="fg" (submit)="fg.valid && onSubmit()">
+  <ng-container mat-dialog-content>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="gateau_nb_pax">Nombre de PAX *</label>
+          <input
+            type="number"
+            placeholder="Nombre de PAX"
+            id="gateau_nb_pax"
+            class="form-control"
+            formControlName="gateau_nb_pax"
+            [ngClass]="{'input-danger': fg.get('gateau_nb_pax').invalid && fg.get('gateau_nb_pax').touched}"
+          >
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="gateau_form_param_fk">Forme *</label>
+          <select
+            id="gateau_form_param_fk"
+            class="form-control"
+            formControlName="gateau_form_param_fk"
+            [ngClass]="{'input-danger': fg.get('gateau_form_param_fk').invalid && fg.get('gateau_form_param_fk').touched}"
+          >
+            <option *ngFor="let form of listForm" [value]="form.param_id">{{form.param_description}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="gateau_type_param_fk">Type *</label>
+          <select
+            id="gateau_type_param_fk"
+            class="form-control"
+            formControlName="gateau_type_param_fk"
+            [ngClass]="{'input-danger': fg.get('gateau_type_param_fk').invalid && fg.get('gateau_type_param_fk').touched}"
+          >
+            <option *ngFor="let type of listType" [value]="type.param_id">{{type.param_description}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="gateau_decoration">Décoration *</label>
+          <textarea
+            id="gateau_decoration"
+            cols="30" rows="10"
+            class="form-control"
+            placeholder="Décoration"
+            formControlName="gateau_decoration"
+            [ngClass]="{'input-danger': fg.get('gateau_decoration').invalid && fg.get('gateau_decoration').touched}"
+          ></textarea>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="file_model">Fichier modèle</label>
+          <input
+            type="file"
+            class="dis-none"
+            (change)="handleFileModel($event)"
+            id="file_model"
+            accept="image/gif, image/jpeg, image/png"
+            #file
+          >
+          <br>
+          <a href="javascript:void(0)">
+            <i
+              class="nc-icon nc-image fs-50"
+              (click)="file.click()"
+              id="placeholder_model"
+              *ngIf="model_url === ''"
+            ></i>
+            <img (click)="file.click()" alt="modèle du gateau" *ngIf="model_url !== ''" [src]="model_url" width="350">
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="gateau_message">Message *</label>
+          <input
+            type="text"
+            id="gateau_message"
+            class="form-control"
+            placeholder="Message"
+            formControlName="gateau_message"
+            [ngClass]="{'input-danger': fg.get('gateau_message').invalid && fg.get('gateau_message').touched}"
+          >
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="gateau_observation">Observation *</label>
+          <textarea
+            id="gateau_observation"
+            cols="30" rows="10"
+            class="form-control"
+            placeholder="Observation"
+            formControlName="gateau_observation"
+            [ngClass]="{'input-danger': fg.get('gateau_observation').invalid && fg.get('gateau_observation').touched}"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="gateau_montant_unitaire">Prix portion *</label>
+          <input
+            type="number"
+            id="gateau_montant_unitaire"
+            placeholder="Prix portion"
+            class="form-control"
+            formControlName="gateau_montant_unitaire"
+            [ngClass]="{'input-danger': fg.get('gateau_montant_unitaire').invalid && fg.get('gateau_montant_unitaire').touched}"
+          >
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="gateau_montant_total">Prix total *</label>
+          <input
+            type="number"
+            placeholder="Prix total"
+            id="gateau_montant_total"
+            class="form-control"
+            formControlName="gateau_montant_total"
+            [ngClass]="{'input-danger': fg.get('gateau_montant_total').invalid && fg.get('gateau_montant_total').touched}"
+          >
+        </div>
+      </div>
+
+    </div>
+  </ng-container>
+
+  <div mat-dialog-actions class="pull-right">
+    <button class="btn btn-outline-danger btn-sm" mat-dialog-close>Annuler</button>
+    <button type="submit" class="btn btn-outline-success btn-sm ml-2" [disabled]="fg.invalid">Enregistrer</button>
+  </div>
+</form>

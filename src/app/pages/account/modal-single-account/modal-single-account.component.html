@@ -29,6 +29,19 @@
       </div>
       <div class="col-md-12">
         <div class="form-group">
+          <label for="groupe">Groupe</label>
+          <select
+            id="groupe"
+            class="form-control"
+            formControlName="user_group"
+            [ngClass]="{'input-danger' : myInput('user_group').touched && myInput('user_group').invalid}"
+          >
+            <option *ngFor="let group of groups" [value]="group.value">{{group.description}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
           <label>Email</label>
           <input
             type="email"
@@ -39,7 +52,7 @@
           >
         </div>
       </div>
-      <div class="col-md-12">
+      <div class="col-md-6">
         <div class="form-group">
           <label>Login</label>
           <input
@@ -48,6 +61,18 @@
             placeholder="Login"
             formControlName="user_login"
             [ngClass]="{'input-danger' : myInput('user_login').touched && myInput('user_login').invalid}"
+          >
+        </div>
+      </div>
+      <div class="col-md-12" *ngIf="!isModif">
+        <div class="form-group">
+          <label>Mot de passe</label>
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Mot de passe"
+            formControlName="user_password"
+            [ngClass]="{'input-danger' : myInput('user_password').touched && myInput('user_password').invalid}"
           >
         </div>
       </div>

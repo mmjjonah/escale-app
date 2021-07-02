@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {SessionService} from '../../shared/services/session/session.service';
 import {AuthService} from '../../layouts/auth-layout/service/auth.service';
 import { StatusCodes } from 'http-status-codes';
+import {_c} from '../../config/constants';
 
 declare const $;
 @Component({
@@ -41,7 +42,11 @@ export class AuthComponent implements OnInit {
       if ( res.status === StatusCodes.OK ) {
         const data = res.data;
         this.session$.setSession(data.token, data.user);
-        const a = this.router.navigate(['/dashboard']);
+        if (data.user.user_group === _c.ADMIN) {
+          const a = this.router.navigate(['/dashboard/chart']);
+        } else {
+          const a = this.router.navigate(['/dashboard/command/simple']);
+        }
       } else {
         this.errorMessage = res.message;
         $('.errorMessage').show('slow');
@@ -65,7 +70,7 @@ export class AuthComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.session$.getUserSession) {
-      const a = this.router.navigate(['/dashboard']);
+      const a = this.router.navigate(['/dashboard/chart']);
     }
     this.animateLogo();
     this.initForm();
