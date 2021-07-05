@@ -49,13 +49,13 @@ export const ROUTES: RouteInfo[] = [
     class: '',
     roles: [_c.ADMIN]
   },
-  {
-    path: '/dashboard/icons',
-    title: 'Icons',
-    icon: 'nc-diamond',
-    class: '',
-    roles: [_c.ADMIN]
-  },
+  // {
+  //   path: '/dashboard/icons',
+  //   title: 'Icons',
+  //   icon: 'nc-diamond',
+  //   class: '',
+  //   roles: [_c.ADMIN]
+  // },
   // {path: '/dashboard/maps', title: 'Maps', icon: 'nc-pin-3', class: ''},
   // {path: '/dashboard/notifications', title: 'Notifications', icon: 'nc-bell-55', class: ''},
   // {path: '/dashboard/user', title: 'User Profile', icon: 'nc-single-02', class: ''},
@@ -81,11 +81,6 @@ export class SidebarComponent implements OnInit {
 
   get user(): User {
     return this.session$.getUserSession
-  }
-
-  logout() {
-    this.session$.clearSession()
-    this.router.navigate(['/'])
   }
 
   ngOnInit() {

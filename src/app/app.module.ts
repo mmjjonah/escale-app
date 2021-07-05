@@ -11,7 +11,6 @@ import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
 import {ErrorInterceptor} from './layouts/admin-layout/error.interceptor';
 import localeFr from '@angular/common/locales/fr';
-import {SecurityInterceptor} from './layouts/admin-layout/security.interceptor';
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -30,7 +29,6 @@ registerLocaleData(localeFr);
   ],
   providers: [
     AdminGuard,
-    // { provide: HTTP_INTERCEPTORS, useValue: SecurityInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: LOCALE_ID, useValue: 'fr-FR'},
   ],

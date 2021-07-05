@@ -5,70 +5,112 @@
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <label for="client_lastname">Nom du client</label>
+          <label for="client_lastname">Nom du client *</label>
           <input
             type="text"
             class="form-control"
             id="client_lastname"
             placeholder="Nom du client"
             formControlName="client_lastname"
-            [ngClass]="{'input-danger': fg.get('client_lastname').invalid && fg.get('client_lastname').touched}"
+            [ngClass]="{'input-danger': fg?.get('client_lastname').invalid && fg?.get('client_lastname').touched}"
           >
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="form-group">
-          <label for="client_firstname">Prénom du client</label>
+          <label for="client_firstname">Prénom du client *</label>
           <input
             type="text"
             class="form-control"
             id="client_firstname"
             placeholder="Prénom du client"
             formControlName="client_firstname"
-            [ngClass]="{'input-danger': fg.get('client_firstname').invalid && fg.get('client_firstname').touched}"
+            [ngClass]="{'input-danger': fg?.get('client_firstname').invalid && fg?.get('client_firstname').touched}"
           >
         </div>
       </div>
 
-      <div class="col-md-12">
+      <div class="col-md-3">
         <div class="form-group">
-          <label for="client_contact">Contact du client</label>
+          <label for="client_age">Âge *</label>
+          <input
+            type="number"
+            class="form-control"
+            id="client_age"
+            placeholder="Âge"
+            formControlName="client_age"
+            [ngClass]="{'input-danger': fg?.get('client_age').invalid && fg?.get('client_age').touched}"
+          >
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="client_sexe">Sexe *</label>
+					<select
+						id="client_sexe"
+						class="form-control"
+						formControlName="client_sexe"
+						[ngClass]="{'input-danger': fg?.get('client_sexe').invalid && fg?.get('client_sexe').touched}"
+					>
+						<option value="M">Masculin</option>
+						<option value="F">Féminin</option>
+					</select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="client_contact">Contact du client *</label>
           <input
             type="text"
             class="form-control"
             id="client_contact"
             placeholder="Contact du client"
             formControlName="client_contact"
-            [ngClass]="{'input-danger': fg.get('client_contact').invalid && fg.get('client_contact').touched}"
+            [ngClass]="{'input-danger': fg?.get('client_contact').invalid && fg?.get('client_contact').touched}"
           >
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="form-group">
-          <label for="command_date_livraison">Date de livraison</label>
-          <input
-            type="date"
-            class="form-control"
-            id="command_date_livraison"
-            placeholder="Date de livraison"
-            formControlName="command_date_livraison"
-            [ngClass]="{'input-danger': fg.get('command_date_livraison').invalid && fg.get('command_date_livraison').touched}"
-          >
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="command_evenement">Évènement</label>
+          <label for="command_evenement">Évènement *</label>
           <input
             type="text"
             class="form-control"
             id="command_evenement"
             placeholder="Évènement"
             formControlName="command_evenement"
-            [ngClass]="{'input-danger': fg.get('command_evenement').invalid && fg.get('command_evenement').touched}"
+            [ngClass]="{'input-danger': fg?.get('command_evenement').invalid && fg?.get('command_evenement').touched}"
+          >
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="command_date_livraison">Date de livraison *</label>
+          <input
+            type="date"
+            class="form-control"
+            id="command_date_livraison"
+            placeholder="Date de livraison"
+            formControlName="command_date_livraison"
+            [min]="min_date_livraison"
+            [ngClass]="{'input-danger': fg?.get('command_date_livraison').invalid && fg?.get('command_date_livraison').touched}"
+          >
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="command_lieu_livraison">Lieu de livraison</label>
+          <input
+            type="text"
+            class="form-control"
+            id="command_lieu_livraison"
+            placeholder="Lieu de livraison"
+            formControlName="command_lieu_livraison"
+            [min]="min_date_livraison"
           >
         </div>
       </div>
@@ -76,27 +118,27 @@
       <div class="col-md-4">
         <div class="form-group">
           <label for="montant_total">Montant total</label>
-          <input type="number" class="form-control" id="montant_total" readonly [value]="montant_total | number: '1.2-2':'fr'">
+          <input type="number" class="form-control" id="montant_total" readonly [value]="montant_total">
         </div>
       </div>
 
       <div class="col-md-4">
         <div class="form-group">
-          <label for="montant_a_compte">À compte</label>
-          <input type="number" class="form-control" (input)="onChangeMontantAcompte($event)" id="montant_a_compte" formControlName="montant_a_compte">
+          <label for="command_montant_a_compte">À compte</label>
+          <input type="number" class="form-control" (input)="onChangeMontantAcompte($event)" id="command_montant_a_compte" formControlName="command_montant_a_compte">
         </div>
       </div>
 
       <div class="col-md-4">
         <div class="form-group">
           <label for="montant_reste_payer">Reste à payer</label>
-          <input type="number" class="form-control" id="montant_reste_payer" readonly [value]="montant_reste_payer | number: '1.2-2':'fr'">
+          <input type="number" class="form-control" id="montant_reste_payer" readonly [value]="montant_reste_payer">
         </div>
       </div>
 
       <div class="col-md-12 mt-3">
         <div class="row">
-          <h6 class="col-md-6">Liste des gateaux</h6>
+          <h6 class="col-md-6">Liste des gateaux *</h6>
           <div class="col-md-6">
             <button type="button" class="btn btn-outline-info btn-sm pull-right" (click)="ajoutGateau()">
               <i class="fa fa-plus"></i>
@@ -119,12 +161,12 @@
 
             <ng-container matColumnDef="forme">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Forme</th>
-              <td mat-cell *matCellDef="let row"> {{row.form}} </td>
+              <td mat-cell *matCellDef="let row"> {{row.forme.param_description}} </td>
             </ng-container>
 
             <ng-container matColumnDef="model">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Modèle</th>
-              <td mat-cell *matCellDef="let row"> {{row.type}} </td>
+              <td mat-cell *matCellDef="let row"> {{row.type.param_description}} </td>
             </ng-container>
 
             <ng-container matColumnDef="montant">
@@ -136,7 +178,7 @@
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Action</th>
               <td mat-cell *matCellDef="let row; let i = index">
                 <ul class="table-actions">
-                  <li matTooltip="Modifier">
+                  <li matTooltip="Modifier" (click)="modifierGateau(row)">
                     <i class="fa fa-edit"></i>
                   </li>
                   <li matTooltip="Supprimer" (click)="supprimerGateau(i)">
@@ -159,7 +201,7 @@
     </div>
   </ng-container>
   <div mat-dialog-actions class="pull-right">
-    <button class="btn btn-outline-danger" mat-dialog-close>Annuler</button>
-    <button type="submit" class="btn btn-outline-success ml-2" [disabled]="fg.invalid">Enregistrer</button>
+    <button type="button" class="btn btn-outline-danger" mat-dialog-close>Annuler</button>
+    <button type="submit" class="btn btn-outline-success ml-2" [disabled]="fg?.invalid">Enregistrer</button>
   </div>
 </form>

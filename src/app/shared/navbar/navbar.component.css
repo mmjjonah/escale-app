@@ -1,0 +1,12 @@
+.user-connected {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.user-connected .user-icon {
+  font-size: 18px;
+  color: var(--gray);
+}
+.user-connected .user-name {
+  font-size: 14px;
+}

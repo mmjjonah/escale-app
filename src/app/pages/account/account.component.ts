@@ -20,14 +20,15 @@ import {_c} from '../../config/constants';
 })
 
 export class AccountComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
   displayedColumns: string[] = ['lastname', 'firstname', 'email', 'group', 'actions'];
   STATUS = _c.status;
   GROUPES = _c.groups;
   dataSource = new MatTableDataSource<User>();
   subscription = new Subscription();
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private user$: UserService,
@@ -49,6 +50,7 @@ export class AccountComponent implements OnInit, AfterViewInit, OnDestroy {
       this.dataSource.paginator.firstPage();
     }
   }
+
   getGroupDesc(name: string) {
     let desc = ''
     this.GROUPES.map(group => {

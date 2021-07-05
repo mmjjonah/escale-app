@@ -34,7 +34,6 @@ export class AuthComponent implements OnInit {
 
   onSubmit(): void {
     const {login, password} = this.formGroup.value;
-    $('.errorMessage').hide('slow');
 
     this.isLoading = true;
     this.auth$.login(login, password).subscribe((res) => {
@@ -49,7 +48,6 @@ export class AuthComponent implements OnInit {
         }
       } else {
         this.errorMessage = res.message;
-        $('.errorMessage').show('slow');
         this.formGroup.markAsUntouched();
       }
     });

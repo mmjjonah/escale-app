@@ -1,4 +1,5 @@
 export const _c = {
+  projectDateRelease: 2021,
   status: {
     ACTIVE: 'ACTIVE',
     INACTIVE: 'INACTIVE'

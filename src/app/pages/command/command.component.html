@@ -11,7 +11,7 @@
       <div class="col-md-5">
         <mat-form-field>
           <mat-label>Rechercher</mat-label>
-          <input matInput #input>
+          <input matInput (keyup)="applyFilter($event)">
         </mat-form-field>
       </div>
       <div class="col-md-7">
@@ -20,21 +20,21 @@
       </div>
     </div>
     <div class="table-responsive">
-      <table mat-table class="w-full" [dataSource]="listCommands" matSort>
+      <table mat-table class="w-full" [dataSource]="dataSource" matSort>
 
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> ID</th>
-          <td mat-cell *matCellDef="let row; let i = index"> {{i + 1}} </td>
+          <td mat-cell *matCellDef="let row;">{{ row.command_id }}</td>
         </ng-container>
 
         <ng-container matColumnDef="nom_prenom">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Client</th>
-          <td mat-cell *matCellDef="let row;"> {{row.client_lastname}} {{row.client_firstname}}</td>
+          <td mat-cell *matCellDef="let row;"> {{row.client.client_lastname}} {{row.client.client_firstname}}</td>
         </ng-container>
 
         <ng-container matColumnDef="contact">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact</th>
-          <td mat-cell *matCellDef="let row;"> {{row.client_contact}}</td>
+          <td mat-cell *matCellDef="let row;"> {{row.client.client_contact}}</td>
         </ng-container>
 
         <ng-container matColumnDef="date_livraison">
@@ -44,7 +44,7 @@
 
         <ng-container matColumnDef="nbr_gateau">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre de gâteau</th>
-          <td mat-cell *matCellDef="let row;"> {{row.list_gateaux.length}}</td>
+          <td mat-cell *matCellDef="let row;"> {{row.gateaux.length}}</td>
         </ng-container>
 
         <ng-container matColumnDef="evenement">
@@ -56,10 +56,16 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Action</th>
         <td mat-cell *matCellDef="let row; let i = index">
           <ul class="table-actions">
-            <li matTooltip="Modifier">
+            <li matTooltip="Modifier" (click)="modifierCommand(row)">
               <i class="fa fa-edit"></i>
             </li>
-            <li matTooltip="Supprimer">
+            <li matTooltip="Retour client" (click)="retourClient(row)">
+              <i class="fa fa-comments-o"></i>
+            </li>
+            <li matTooltip="Imprimer le bon de commande" (click)="purchaseOrder(row.command_id)">
+              <i class="fa fa-share-square-o"></i>
+            </li>
+            <li matTooltip="Supprimer" (click)="supprimerCommand(row)">
               <i class="fa fa-trash-o"></i>
             </li>
           </ul>

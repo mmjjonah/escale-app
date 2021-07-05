@@ -15,15 +15,15 @@ export class UserService {
     private http: HttpClient
   ) { }
   getUsers(filter: any = {}): Observable<ApiRes> {
-    return this.http.get<ApiRes>(api.api_url + endpoints.users, { params: filter })
+    return this.http.get<ApiRes>(api.api_url + endpoints.user, { params: filter })
   }
   createUser(data: User): Observable<ApiRes> {
-    return this.http.post<ApiRes>(api.api_url + endpoints.users, data);
+    return this.http.post<ApiRes>(api.api_url + endpoints.user, data);
   }
   updateUser(pk: number, data: any): Observable<ApiRes> {
-    return this.http.patch<ApiRes>(api.api_url + endpoints.users + '/' + pk, data)
+    return this.http.patch<ApiRes>(api.api_url + endpoints.user + '/' + pk, data)
   }
   deleteUser(pk: number): Observable<ApiRes> {
-    return this.http.delete<ApiRes>(api.api_url + endpoints.users + '/' + pk)
+    return this.http.delete<ApiRes>(api.api_url + endpoints.user + '/' + pk)
   }
 }

@@ -28,7 +28,11 @@ export const AdminLayoutRoutes: Routes = [
       {path: 'typography', component: TypographyComponent},
       {path: 'icons', component: IconsComponent},
       {path: 'notifications', component: NotificationsComponent},
-      {path: 'upgrade', component: UpgradeComponent}
+      {path: 'upgrade', component: UpgradeComponent},
+      {
+        path: '**',
+        redirectTo: 'chart'
+      }
     ]
   },
 ];
