@@ -20,8 +20,12 @@ export class CommandService {
     return this.http.put<ApiRes>(api.api_url + endpoints.command, data)
   }
 
-  findAll(): Observable<ApiRes> {
-    return this.http.get<ApiRes>(api.api_url + endpoints.command)
+  findAll(command_type: string): Observable<ApiRes> {
+    return this.http.get<ApiRes>(api.api_url + endpoints.command, {
+      params: {
+        command_type
+      }
+    })
   }
 
   delete(id: number): Observable<ApiRes> {
@@ -38,5 +42,9 @@ export class CommandService {
 
   getGateauModel(gateau_id: string): Observable<ApiRes> {
     return this.http.get<ApiRes>(api.api_url + endpoints.command_widget.gateauModel + '/' + gateau_id)
+  }
+
+  setNewNumberCommand(): Observable<ApiRes> {
+    return this.http.get<ApiRes>(api.api_url + endpoints.command_widget.newId)
   }
 }

@@ -27,10 +27,11 @@ export class CommandComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
+  subscription = new Subscription()
   dataSource = new MatTableDataSource<Command>()
   displayedColumns = ['id', 'nom_prenom', 'contact', 'date_livraison', 'nbr_gateau', 'evenement', 'action']
   _c = _c
-  subscription = new Subscription()
+  command_type = ''
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -38,12 +39,8 @@ export class CommandComponent implements OnInit, OnDestroy, AfterViewInit {
     private session$: SessionService,
     private command$: CommandService,
     private toast$: ToastService,
-    private tools$: ToolsService
+    private tools$: ToolsService,
   ) {
-  }
-
-  get type(): string {
-    return this.activatedRoute.snapshot.paramMap.get('type') as string
   }
 
   get user(): User {
@@ -161,7 +158,7 @@ export class CommandComponent implements OnInit, OnDestroy, AfterViewInit {
 
   initList() {
     this.subscription.add(
-      this.command$.findAll()
+      this.command$.findAll(this.command_type)
         .subscribe(res => {
           if (res.status === StatusCodes.OK) {
             this.dataSource.data = res.data
@@ -172,13 +169,18 @@ export class CommandComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
     this.matDialog.closeAll()
-    this.tools$.showSpinner()
-    if (this.user.user_group === _c.OPERATOR) {
-      this.ajoutCommand()
-    } else {
-      this.initList()
-    }
-    this.tools$.hideSpinner()
+    this.subscription.add(
+      this.activatedRoute.params.subscribe(params => {
+        this.command_type = params.command_type
+        this.tools$.showSpinner()
+        if (this.user.user_group === _c.OPERATOR) {
+          this.ajoutCommand()
+        } else {
+          this.initList()
+        }
+        this.tools$.hideSpinner()
+      })
+    )
   }
 
   ngAfterViewInit() {

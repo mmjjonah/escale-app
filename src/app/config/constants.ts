@@ -1,5 +1,9 @@
 export const _c = {
   projectDateRelease: 2021,
+  command_type: {
+    SIMPLE: 'SIMPLE',
+    SPECIAL: 'SPECIAL'
+  },
   status: {
     ACTIVE: 'ACTIVE',
     INACTIVE: 'INACTIVE'

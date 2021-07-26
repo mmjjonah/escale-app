@@ -1,6 +1,28 @@
 <form [formGroup]="fg" (submit)="fg.valid && onSubmit()">
   <h4 mat-dialog-title>Création commande</h4>
   <ng-container mat-dialog-content>
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label for="num_commande">Numéro de la commande *</label>
+        <input
+          type="text"
+          class="form-control"
+          id="num_commande"
+          [placeholder]="numCommand"
+          disabled
+        >
+      </div>
+      <div class="form-group col-md-6">
+        <label for="date_commande">Date de la commande *</label>
+        <input
+          type="text"
+          class="form-control"
+          id="date_commande"
+          [placeholder]="dateNow | date: 'dd/MM/yyyy H:mm'"
+          disabled
+        >
+      </div>
+    </div>
     <h6 class="mb-3">Information sur le client</h6>
     <div class="row">
       <div class="col-md-6">
@@ -72,7 +94,7 @@
         </div>
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-12">
         <div class="form-group">
           <label for="command_evenement">Évènement *</label>
           <input
@@ -97,6 +119,21 @@
             formControlName="command_date_livraison"
             [min]="min_date_livraison"
             [ngClass]="{'input-danger': fg?.get('command_date_livraison').invalid && fg?.get('command_date_livraison').touched}"
+          >
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="command_heure_livraison">Heure de livraison *</label>
+          <input
+            type="time"
+            class="form-control"
+            id="command_heure_livraison"
+            placeholder="Date de livraison"
+            formControlName="command_heure_livraison"
+            [min]="min_date_livraison"
+            [ngClass]="{'input-danger': fg?.get('command_heure_livraison').invalid && fg?.get('command_heure_livraison').touched}"
           >
         </div>
       </div>

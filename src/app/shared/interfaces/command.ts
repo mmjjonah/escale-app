@@ -8,6 +8,7 @@ export interface Command {
   command_evenement: string,
   command_montant_a_compte: number,
   command_retour_client: string,
+  command_type: string,
   client: Client,
   gateaux: Gateau[]
 }

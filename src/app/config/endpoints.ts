@@ -7,6 +7,7 @@ export const endpoints = {
     addFeedback: '/command/feedback',
     purchaseOrder: '/command/purchase-order',
     gateauModel: '/command/gateau_model',
+    newId: '/command/new-id'
   },
   client: '/client'
 };

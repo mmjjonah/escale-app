@@ -20,7 +20,7 @@ export const AdminLayoutRoutes: Routes = [
     children: [
       {path: 'chart', component: DashboardComponent},
       {path: 'account', component: AccountComponent},
-      {path: 'command/:type', component: CommandComponent},
+      {path: 'command/:command_type', component: CommandComponent},
       {path: 'operator', component: OperatorComponent},
       {path: 'client', component: ClientComponent},
       {path: 'user', component: UserComponent},

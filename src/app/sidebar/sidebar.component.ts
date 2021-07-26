@@ -29,14 +29,14 @@ export const ROUTES: RouteInfo[] = [
     roles: [ _c.ADMIN ]
   },
   {
-    path: '/dashboard/command/simple',
+    path: '/dashboard/command/' + _c.command_type.SIMPLE,
     title: 'Gestion de commande',
     icon: 'nc-paper',
     class: '',
     roles: [_c.ADMIN, _c.OPERATOR]
   },
   {
-    path: '/dashboard/command/special',
+    path: '/dashboard/command/' + _c.command_type.SPECIAL,
     title: 'Spécial',
     icon: 'nc-bookmark-2',
     class: '',
