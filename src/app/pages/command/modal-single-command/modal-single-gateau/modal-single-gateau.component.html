@@ -106,6 +106,64 @@
         </div>
       </div>
 
+      <ng-container *ngIf="command_type === _c.command_type.SPECIAL">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="gateau_arome_special">Arôme spécial</label>
+            <input
+              type="text"
+              id="gateau_arome_special"
+              class="form-control"
+              placeholder="Arôme spécial"
+              formControlName="gateau_arome_special"
+              [ngClass]="{'input-danger': fg.get('gateau_arome_special').invalid && fg.get('gateau_arome_special').touched}"
+            >
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="gateau_piece_montee">Pièce montée</label>
+            <input
+              type="number"
+              id="gateau_piece_montee"
+              class="form-control"
+              placeholder="Pièce montée"
+              formControlName="gateau_piece_montee"
+              [ngClass]="{'input-danger': fg.get('gateau_piece_montee').invalid && fg.get('gateau_piece_montee').touched}"
+            >
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="gateau_layercake">Layer Cake</label>
+            <input
+              type="number"
+              id="gateau_layercake"
+              class="form-control"
+              placeholder="Layer Cake"
+              formControlName="gateau_layercake"
+              [ngClass]="{'input-danger': fg.get('gateau_layercake').invalid && fg.get('gateau_layercake').touched}"
+            >
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="gateau_dripcake">Drip Cake</label>
+            <input
+              type="number"
+              id="gateau_dripcake"
+              class="form-control"
+              placeholder="Drip Cake"
+              formControlName="gateau_dripcake"
+              [ngClass]="{'input-danger': fg.get('gateau_dripcake').invalid && fg.get('gateau_dripcake').touched}"
+            >
+          </div>
+        </div>
+      </ng-container>
+
       <div class="col-md-6">
         <div class="form-group">
           <label for="gateau_montant_unitaire">Prix portion</label>
@@ -119,6 +177,7 @@
           >
         </div>
       </div>
+
       <div class="col-md-6">
         <div class="form-group">
           <label for="gateau_montant_total">Prix total *</label>

@@ -21,12 +21,7 @@ import {ModalSingleCommandComponent} from '../../pages/command/modal-single-comm
 import {ModalSingleGateauComponent} from '../../pages/command/modal-single-command/modal-single-gateau/modal-single-gateau.component';
 
 import {DashboardComponent} from '../../pages/dashboard/dashboard.component';
-import {IconsComponent} from '../../pages/icons/icons.component';
-import {NotificationsComponent} from '../../pages/notifications/notifications.component';
 import {OperatorComponent} from '../../pages/operator/operator.component';
-import {TableComponent} from '../../pages/table/table.component';
-import {TypographyComponent} from '../../pages/typography/typography.component';
-import {UpgradeComponent} from '../../pages/upgrade/upgrade.component';
 import {UserComponent} from '../../pages/user/user.component';
 import {SpinnerComponent} from '../../shared/components/spinner/spinner.component';
 import {FixedPluginModule} from '../../shared/fixedplugin/fixedplugin.module';
@@ -67,11 +62,6 @@ import {UserService} from './services/user/user.service';
     AdminLayoutComponent,
     DashboardComponent,
     UserComponent,
-    TableComponent,
-    UpgradeComponent,
-    TypographyComponent,
-    IconsComponent,
-    NotificationsComponent,
     OperatorComponent,
     AccountComponent,
     ModalSingleAccountComponent,

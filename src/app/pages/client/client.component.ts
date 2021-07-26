@@ -17,7 +17,7 @@ export class ClientComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   dataSource = new MatTableDataSource<Client>()
-  displayedColumns = ['client_id', 'client_lastname', 'client_firstname', 'client_age', 'client_sexe']
+  displayedColumns = ['client_id', 'client_lastname', 'client_firstname', 'client_age', 'client_sexe', 'client_contact', 'date_first_command']
   subscription = new Subscription()
 
   constructor(

@@ -20,15 +20,20 @@ export class ModalSingleGateauComponent implements OnInit, OnDestroy {
   listForm: ParamGen[] = []
   listType: ParamGen[] = []
   model_url = ''
+  _c = _c
   fg: FormGroup
+  gateauData: Gateau = null
 
   constructor(
     private param$: ParamGeneralService,
     private dialogRef: MatDialogRef<ModalSingleGateauComponent>,
-    @Inject(MAT_DIALOG_DATA) private dialogData: Gateau = null,
+    @Inject(MAT_DIALOG_DATA) private dialogData: { gateauData: Gateau, command_type: string },
     private command$: CommandService,
     private tools$: ToolsService,
-  ) {
+  ) { }
+
+  get command_type(): string {
+    return this.dialogData.command_type
   }
 
   onSubmit() {
@@ -64,6 +69,7 @@ export class ModalSingleGateauComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.gateauData = this.dialogData.gateauData
     this.subscription.add(
       this.param$.getParamByCategories(_c.param_categories.FORME_GATEAU)
         .subscribe((res) => {
@@ -85,29 +91,37 @@ export class ModalSingleGateauComponent implements OnInit, OnDestroy {
       gateau_type_param_fk: new FormControl('', [Validators.required]),
       gateau_decoration: new FormControl('', [Validators.required]),
       gateau_model: new FormControl('', []),
+      gateau_arome_special: new FormControl('', []),
+      gateau_piece_montee: new FormControl('', []),
+      gateau_layercake: new FormControl('', []),
+      gateau_dripcake: new FormControl('', []),
       gateau_message: new FormControl('', [Validators.required]),
       gateau_observation: new FormControl('', [Validators.required]),
-      gateau_montant_unitaire: new FormControl('',),
+      gateau_montant_unitaire: new FormControl('', []),
       gateau_montant_total: new FormControl('', [Validators.required])
     })
 
-    if (this.dialogData) {
+    if (this.gateauData) {
       this.fg.setValue({
         ...this.fg.value,
-        gateau_id: this.dialogData.gateau_id,
-        gateau_nb_pax: this.dialogData.gateau_nb_pax,
-        gateau_form_param_fk: this.dialogData.gateau_form_param_fk,
-        gateau_type_param_fk: this.dialogData.gateau_type_param_fk,
-        gateau_decoration: this.dialogData.gateau_decoration,
-        gateau_model: this.dialogData.gateau_model,
-        gateau_message: this.dialogData.gateau_message,
-        gateau_observation: this.dialogData.gateau_observation,
-        gateau_montant_unitaire: this.dialogData.gateau_montant_unitaire,
-        gateau_montant_total: this.dialogData.gateau_montant_total,
+        gateau_id: this.gateauData.gateau_id,
+        gateau_nb_pax: this.gateauData.gateau_nb_pax,
+        gateau_form_param_fk: this.gateauData.gateau_form_param_fk,
+        gateau_type_param_fk: this.gateauData.gateau_type_param_fk,
+        gateau_decoration: this.gateauData.gateau_decoration,
+        gateau_model: this.gateauData.gateau_model,
+        gateau_message: this.gateauData.gateau_message,
+        gateau_arome_special: this.gateauData.gateau_arome_special,
+        gateau_piece_montee: this.gateauData.gateau_piece_montee,
+        gateau_layercake: this.gateauData.gateau_layercake,
+        gateau_dripcake: this.gateauData.gateau_dripcake,
+        gateau_observation: this.gateauData.gateau_observation,
+        gateau_montant_unitaire: this.gateauData.gateau_montant_unitaire,
+        gateau_montant_total: this.gateauData.gateau_montant_total,
       })
-      if (this.dialogData.gateau_model) {
+      if (this.gateauData.gateau_model) {
         this.tools$.showSpinner()
-        this.command$.getGateauModel(this.dialogData.gateau_id.toString())
+        this.command$.getGateauModel(this.gateauData.gateau_id.toString())
           .pipe(
             delay(0)
           )

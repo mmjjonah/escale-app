@@ -2,7 +2,6 @@ import {formatDate} from '@angular/common';
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {ActivatedRoute} from '@angular/router';
 import {StatusCodes} from 'http-status-codes';
 import {Subscription} from 'rxjs';
 import {CommandService} from '../../../layouts/admin-layout/services/command/command.service';
@@ -29,7 +28,8 @@ export class ModalSingleCommandComponent implements OnInit, OnDestroy {
   subscription = new Subscription()
   dateNow = new Date
   min_date_livraison = formatDate(this.dateNow, 'yyyy-MM-dd', 'fr')
-  numCommand: any = '00000';
+  numCommand: any = '00000'
+  commandData: Command = null
 
   constructor(
     private matDialog: MatDialog,
@@ -37,8 +37,7 @@ export class ModalSingleCommandComponent implements OnInit, OnDestroy {
     private dialogRef: MatDialogRef<ModalSingleCommandComponent>,
     private session$: SessionService,
     private command$: CommandService,
-    @Inject(MAT_DIALOG_DATA) private dialogData: Command = null,
-    private activatedRoute: ActivatedRoute
+    @Inject(MAT_DIALOG_DATA) private dialogData: { commandData: Command, command_type: string },
   ) { }
 
   get user(): User {
@@ -46,7 +45,7 @@ export class ModalSingleCommandComponent implements OnInit, OnDestroy {
   }
 
   get command_type(): string {
-    return this.activatedRoute.snapshot.paramMap.get('command_type')
+    return this.dialogData.command_type
   }
 
   onChangeMontantAcompte(event) {
@@ -69,7 +68,10 @@ export class ModalSingleCommandComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.matDialog.open(ModalSingleGateauComponent, {
         width: '800px',
-        data: gateauData,
+        data: {
+          gateauData,
+          command_type: this.command_type
+        },
         disableClose: true
       }).afterClosed()
         .subscribe((gateau) => {
@@ -80,7 +82,6 @@ export class ModalSingleCommandComponent implements OnInit, OnDestroy {
               }
               return g
             })
-            console.log(gateau)
             this.montant_total = 0
             this.listGateaux.map((el) => {
               this.montant_total += parseInt(el.gateau_montant_total, 10)
@@ -95,7 +96,11 @@ export class ModalSingleCommandComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.matDialog.open(ModalSingleGateauComponent, {
         width: '800px',
-        disableClose: true
+        disableClose: true,
+        data: {
+          gateauData: null,
+          command_type: this.command_type
+        }
       }).afterClosed()
         .subscribe((gateau) => {
           if (gateau) {
@@ -129,6 +134,7 @@ export class ModalSingleCommandComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.commandData = this.dialogData.commandData
     this.fg = new FormGroup({
       command_id: new FormControl(null),
       client_id: new FormControl(null),
@@ -146,38 +152,37 @@ export class ModalSingleCommandComponent implements OnInit, OnDestroy {
       gateaux: new FormControl('', [Validators.required]),
     })
 
-    if (this.dialogData) {
+    if (this.commandData) {
       this.fg.setValue({
         ...this.fg.value,
-        client_id: this.dialogData.client.client_id,
-        command_id: this.dialogData.command_id,
-        client_lastname: this.dialogData.client.client_lastname,
-        client_firstname: this.dialogData.client.client_firstname,
-        client_contact: this.dialogData.client.client_contact,
-        client_age: this.dialogData.client.client_age,
-        client_sexe: this.dialogData.client.client_sexe,
-        command_date_livraison: formatDate(this.dialogData.command_date_livraison, 'yyyy-MM-dd', 'fr'),
-        command_heure_livraison: formatDate(this.dialogData.command_date_livraison, 'H:mm', 'fr'),
-        command_lieu_livraison: this.dialogData.command_lieu_livraison,
-        command_evenement: this.dialogData.command_evenement,
-        command_montant_a_compte: this.dialogData.command_montant_a_compte,
-        gateaux: this.dialogData.gateaux,
+        client_id: this.commandData.client.client_id,
+        command_id: this.commandData.command_id,
+        client_lastname: this.commandData.client.client_lastname,
+        client_firstname: this.commandData.client.client_firstname,
+        client_contact: this.commandData.client.client_contact,
+        client_age: this.commandData.client.client_age,
+        client_sexe: this.commandData.client.client_sexe,
+        command_date_livraison: formatDate(this.commandData.command_date_livraison, 'yyyy-MM-dd', 'fr'),
+        command_heure_livraison: formatDate(this.commandData.command_date_livraison, 'H:mm', 'fr'),
+        command_lieu_livraison: this.commandData.command_lieu_livraison,
+        command_evenement: this.commandData.command_evenement,
+        command_montant_a_compte: this.commandData.command_montant_a_compte,
+        gateaux: this.commandData.gateaux,
       })
-      this.listGateaux = this.dialogData.gateaux
-      this.montant_total = this.dialogData.gateaux
+      this.listGateaux = this.commandData.gateaux
+      this.montant_total = this.commandData.gateaux
         .map((g) => {
           return g.gateau_montant_total
         })
         .reduce((acc, montant_gateau) => {
           return acc + montant_gateau
         })
-      this.montant_reste_payer = this.montant_total - this.dialogData.command_montant_a_compte
-      this.numCommand = this.dialogData.command_id.toString()
+      this.montant_reste_payer = this.montant_total - this.commandData.command_montant_a_compte
+      this.numCommand = this.commandData.command_id.toString()
       this.numCommand = this.numCommand.padStart(5, '0')
     } else {
       this.setNewNumberCommand()
     }
-
   }
 
   ngOnDestroy() {

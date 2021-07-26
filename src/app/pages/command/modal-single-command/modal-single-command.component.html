@@ -1,5 +1,5 @@
 <form [formGroup]="fg" (submit)="fg.valid && onSubmit()">
-  <h4 mat-dialog-title>Création commande</h4>
+  <h4 mat-dialog-title>{{ commandData ? 'Modification' : 'Création'}} commande</h4>
   <ng-container mat-dialog-content>
     <div class="row">
       <div class="form-group col-md-6">

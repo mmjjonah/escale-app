@@ -107,12 +107,14 @@ export class CommandComponent implements OnInit, OnDestroy, AfterViewInit {
     this.subscription.add(
       this.matDialog.open(ModalSingleCommandComponent, {
         width: '800px',
-        data: commandData,
+        data: {
+          commandData,
+          command_type: this.command_type
+        },
         disableClose: true
       }).afterClosed()
         .subscribe((command) => {
           if (command) {
-            console.log(command)
             this.tools$.showSpinner()
             this.command$.createOrUpdate(command).subscribe((res) => {
               if (res.status === StatusCodes.OK) {
@@ -132,11 +134,14 @@ export class CommandComponent implements OnInit, OnDestroy, AfterViewInit {
     this.subscription.add(
       this.matDialog.open(ModalSingleCommandComponent, {
         width: '800px',
-        disableClose: true
+        disableClose: true,
+        data: {
+          commandData: null,
+          command_type: this.command_type
+        }
       }).afterClosed()
         .subscribe((command) => {
           if (command) {
-            console.log(command)
             this.tools$.showSpinner()
             this.command$.createOrUpdate(command).subscribe((res) => {
               if (res.status === StatusCodes.CREATED) {
