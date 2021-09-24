@@ -47,4 +47,8 @@ export class CommandService {
   setNewNumberCommand(): Observable<ApiRes> {
     return this.http.get<ApiRes>(api.api_url + endpoints.command_widget.newId)
   }
+
+  dashboard(): Observable<ApiRes> {
+    return this.http.get<ApiRes>(api.api_url + endpoints.command_widget.dashboard)
+  }
 }

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CommandService } from 'app/layouts/admin-layout/services/command/command.service';
 import Chart from 'chart.js';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -8,58 +10,98 @@ import Chart from 'chart.js';
     templateUrl: 'dashboard.component.html'
 })
 
-export class DashboardComponent implements OnInit{
-
+export class DashboardComponent implements OnInit, OnDestroy{
+  private subscription = new Subscription();
   public canvas : any;
   public ctx;
   public chartColor;
   public chartEmail;
   public chartHours;
+  public commandDashboard
+  private chartCommand = []
 
-    ngOnInit(){
-      this.chartColor = "#FFFFFF";
+  constructor(
+    private command$: CommandService
+  ) {}
 
-      var speedCanvas = document.getElementById("speedChart");
+  async ngOnInit() {
+    this.chartColor = "#FFFFFF";
 
-      var dataFirst = {
-        data: [0, 19, 15, 20, 30, 40, 40, 50, 25, 30, 50, 70],
-        fill: false,
-        borderColor: '#fbc658',
-        backgroundColor: 'transparent',
-        pointBorderColor: '#fbc658',
-        pointRadius: 4,
-        pointHoverRadius: 4,
-        pointBorderWidth: 8,
-      };
+    const resDashboard = await this.command$.dashboard().toPromise()
 
-      var dataSecond = {
-        data: [0, 5, 10, 12, 20, 27, 30, 34, 42, 45, 55, 63],
-        fill: false,
-        borderColor: '#51CACF',
-        backgroundColor: 'transparent',
-        pointBorderColor: '#51CACF',
-        pointRadius: 4,
-        pointHoverRadius: 4,
-        pointBorderWidth: 8
-      };
-
-      var speedData = {
-        labels: ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aôut", "Septembre", "Octobre", "Novembre", "Decembre"],
-        datasets: [dataFirst, dataSecond]
-      };
-
-      var chartOptions = {
-        legend: {
-          display: false,
-          position: 'top'
-        }
-      };
-
-      var lineChart = new Chart(speedCanvas, {
-        type: 'line',
-        hover: false,
-        data: speedData,
-        options: chartOptions
-      });
+    for (const [key, count] of Object.entries(resDashboard.data.command)) {
+      this.chartCommand = [...this.chartCommand, count]
     }
+
+    let dataCommand = {}
+
+    let speedCanvas = document.getElementById("speedChart");
+
+    dataCommand = {
+      data: this.chartCommand,
+      fill: false,
+      borderColor: '#fbc658',
+      backgroundColor: 'transparent',
+      pointBorderColor: '#fbc658',
+      pointRadius: 4,
+      pointHoverRadius: 4,
+      pointBorderWidth: 8,
+    };
+
+    let dataClient = {
+      data: [0, 5, 10, 12, 20, 27, 30],
+      fill: false,
+      borderColor: '#51CACF',
+      backgroundColor: 'transparent',
+      pointBorderColor: '#51CACF',
+      pointRadius: 4,
+      pointHoverRadius: 4,
+      pointBorderWidth: 8
+    };
+
+    let dataGateau = {
+      data: [8, 2, 10, 6, 12, 22, 2],
+      fill: false,
+      borderColor: '#fbc658',
+      backgroundColor: 'transparent',
+      pointBorderColor: '#fbc658',
+      pointRadius: 4,
+      pointHoverRadius: 4,
+      pointBorderWidth: 8
+    };
+    
+    let dataMontant = {
+      data: [5, 5, 15, 0, 24, 12, 15],
+      fill: false,
+      borderColor: '#6bd098',
+      backgroundColor: 'transparent',
+      pointBorderColor: '#6bd098',
+      pointRadius: 4,
+      pointHoverRadius: 4,
+      pointBorderWidth: 8
+    };
+
+    let speedData = {
+      labels: ["Lundi", "Mardi", "mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"],
+      datasets: [dataCommand, dataClient, dataMontant]
+    };
+
+    let chartOptions = {
+      legend: {
+        display: false,
+        position: 'top'
+      }
+    };
+
+    let lineChart = new Chart(speedCanvas, {
+      type: 'line',
+      hover: false,
+      data: speedData,
+      options: chartOptions
+    });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe()
+  }
 }
