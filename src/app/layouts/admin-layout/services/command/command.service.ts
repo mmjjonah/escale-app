@@ -48,7 +48,12 @@ export class CommandService {
     return this.http.get<ApiRes>(api.api_url + endpoints.command_widget.newId)
   }
 
-  dashboard(): Observable<ApiRes> {
-    return this.http.get<ApiRes>(api.api_url + endpoints.command_widget.dashboard)
+  chart(params: {
+    date_du: string,
+    date_au: string
+  }): Observable<ApiRes> {
+    return this.http.get<ApiRes>(api.api_url + endpoints.command_widget.chart, {
+      params
+    })
   }
 }

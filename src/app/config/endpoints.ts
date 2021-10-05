@@ -8,7 +8,7 @@ export const endpoints = {
     purchaseOrder: '/command/purchase-order',
     gateauModel: '/command/gateau_model',
     newId: '/command/new-id',
-    dashboard: '/command/dashboard'
+    chart: '/command/chart'
   },
   client: '/client'
 };

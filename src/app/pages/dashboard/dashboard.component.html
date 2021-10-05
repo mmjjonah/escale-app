@@ -105,26 +105,65 @@
   </div>
 </div>
 <div class="row">
+
+  <!-- commandes -->
   <div class="col-md-12">
     <div class="card card-chart">
       <div class="card-header">
         <h5 class="card-title">COMMANDES</h5>
-        <p class="card-category">Charte du commande des clients</p>
+        <p class="card-category">- Filtres -</p>
+        <form class="row" [formGroup]="fgFilterCommand" (submit)="fgFilterCommand.valid && onSubmitFilterCommand()">
+          <div class="col-md-5">
+            <div class="row">
+              <label class="col-sm-3" for="command_date_du">Date début :</label>
+              <input type="date" formControlName="command_date_du" id="command_date_du" class="form-control form-control-sm col-sm-9">
+            </div>
+          </div>
+          <div class="col-md-5 mb-2">
+            <div class="row">
+              <label class="col-sm-3" for="command_date_au">Date fin :</label>
+              <input type="date" formControlName="command_date_au" id="command_date_au" class="form-control form-control-sm col-sm-9">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <button class="btn-warning btn-sm btn-block" type="submit" [disabled]="fgFilterCommand?.invalid">Valider</button>
+          </div>
+        </form>
+        <hr>
       </div>
       <div class="card-body">
-        <canvas id="speedChart" width="400" height="100"></canvas>
+        <canvas id="commandChart" width="400" height="80"></canvas>
       </div>
-      <div class="card-footer">
-        <div class="chart-legend">
-          <i class="fa fa-circle text-warning"></i> Commandes
-          <i class="fa fa-circle text-info ml-2"></i> Gâteau
-          <i class="fa fa-circle text-danger ml-2"></i> Clients
-          <i class="fa fa-circle text-success ml-2"></i> Montants
-        </div>
-        <hr/>
-        <div class="card-stats">
-          <i class="fa fa-check"></i> Data information certified
-        </div>
+    </div>
+  </div>
+
+  <!-- gateaux -->
+  <div class="col-md-12">
+    <div class="card card-chart">
+      <div class="card-header">
+        <h5 class="card-title">GATEAUX</h5>
+        <p class="card-category">- Filtres -</p>
+        <form class="row" [formGroup]="fgFilterGateau" (submit)="fgFilterGateau.valid && onSubmitFilterGateau()">
+          <div class="col-md-5">
+            <div class="row">
+              <label class="col-sm-3" for="gateau_date_du">Date début :</label>
+              <input type="date" formControlName="gateau_date_du" id="gateau_date_du" class="form-control form-control-sm col-sm-9">
+            </div>
+          </div>
+          <div class="col-md-5 mb-2">
+            <div class="row">
+              <label class="col-sm-3" for="gateau_date_au">Date fin :</label>
+              <input type="date" formControlName="gateau_date_au" id="gateau_date_au" class="form-control form-control-sm col-sm-9">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <button class="btn-success btn-sm btn-block" type="submit" [disabled]="fgFilterGateau?.invalid">Valider</button>
+          </div>
+        </form>
+        <hr>
+      </div>
+      <div class="card-body">
+        <canvas id="gateauChart" width="400" height="80"></canvas>
       </div>
     </div>
   </div>
