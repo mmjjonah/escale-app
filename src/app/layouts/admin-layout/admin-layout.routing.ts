@@ -6,6 +6,7 @@ import {DashboardComponent} from '../../pages/dashboard/dashboard.component';
 import {OperatorComponent} from '../../pages/operator/operator.component';
 import {UserComponent} from '../../pages/user/user.component';
 import {AdminLayoutComponent} from './admin-layout.component';
+import {SettingsComponent} from '../../pages/settings/settings.component';
 
 export const AdminLayoutRoutes: Routes = [
   {
@@ -13,6 +14,7 @@ export const AdminLayoutRoutes: Routes = [
     component: AdminLayoutComponent,
     children: [
       {path: 'chart', component: DashboardComponent},
+      {path: 'settings', component: SettingsComponent},
       {path: 'account', component: AccountComponent},
       {path: 'command/:command_type', component: CommandComponent},
       {path: 'operator', component: OperatorComponent},

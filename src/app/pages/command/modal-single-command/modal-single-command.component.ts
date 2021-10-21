@@ -48,8 +48,10 @@ export class ModalSingleCommandComponent implements OnInit, OnDestroy {
     return this.dialogData.command_type
   }
 
-  onChangeMontantAcompte(event) {
-    this.montant_reste_payer = this.montant_total - parseInt(event.target.value, 10)
+  setMontantReste(event, type: 'REDUCTION' | 'A_COMPTE') {
+    this.montant_reste_payer = this.montant_total
+      - parseInt(this.fg.get(type !== 'REDUCTION' ? 'command_montant_reduction' : 'command_montant_a_compte').value, 10)
+      - parseInt(event.target.value, 10);
   }
 
   supprimerGateau(id: number) {
@@ -86,6 +88,9 @@ export class ModalSingleCommandComponent implements OnInit, OnDestroy {
             this.listGateaux.map((el) => {
               this.montant_total += parseInt(el.gateau_montant_total, 10)
             })
+            this.montant_reste_payer = this.montant_total
+              - parseInt(this.fg.get('command_montant_reduction').value, 10)
+              - parseInt(this.fg.get('command_montant_a_compte').value, 10)
             this.fg.get('gateaux').setValue(this.listGateaux)
           }
         })
@@ -181,7 +186,7 @@ export class ModalSingleCommandComponent implements OnInit, OnDestroy {
         .reduce((acc, montant_gateau) => {
           return acc + montant_gateau
         })
-      this.montant_reste_payer = this.montant_total - this.commandData.command_montant_a_compte
+      this.montant_reste_payer = this.montant_total - this.commandData.command_montant_a_compte - this.commandData.command_montant_reduction
       this.numCommand = this.commandData.command_id.toString()
       this.numCommand = this.numCommand.padStart(5, '0')
     } else {

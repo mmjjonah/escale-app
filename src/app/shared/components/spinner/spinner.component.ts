@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {ToolsService} from '../../services/tools/tools.service';
 
@@ -11,13 +11,15 @@ export class SpinnerComponent implements OnInit, OnDestroy {
   show = false
   subscription = new Subscription()
   constructor(
-    private tools$: ToolsService
+    private tools$: ToolsService,
+    private cd: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
     this.subscription.add(
       this.tools$.spinner.subscribe(res => {
         this.show = res
+        this.cd.detectChanges()
       })
     )
   }

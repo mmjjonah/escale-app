@@ -61,7 +61,6 @@ export class ModalSingleGateauComponent implements OnInit, OnDestroy {
     const file = event.target.files[0]
     const reader = new FileReader()
     reader.onload = (e) => {
-      console.log(e)
       this.model_url = reader.result as string
       this.fg.get('gateau_model').setValue(reader.result);
     }

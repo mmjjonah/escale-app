@@ -37,6 +37,8 @@ import {AdminLayoutRoutes} from './admin-layout.routing';
 import {ClientService} from './services/client/client.service';
 import {CommandService} from './services/command/command.service';
 import {UserService} from './services/user/user.service';
+import {SettingsComponent} from '../../pages/settings/settings.component';
+import {ModalSingleSettingComponent} from '../../pages/settings/modal-single-setting/modal-single-setting.component';
 
 @NgModule({
   imports: [
@@ -71,7 +73,9 @@ import {UserService} from './services/user/user.service';
     ModalSingleCommandComponent,
     ModalSingleGateauComponent,
     ModalRetourClientComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    SettingsComponent,
+    ModalSingleSettingComponent
   ],
   providers: [
     UserService,

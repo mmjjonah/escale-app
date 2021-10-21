@@ -141,7 +141,7 @@
       <div class="col-md-4">
         <div class="form-group">
           <label for="command_montant_reduction">Réduction</label>
-          <input type="number" class="form-control" id="command_montant_reduction"  formControlName="command_montant_reduction">
+          <input type="number" class="form-control" id="command_montant_reduction" (input)="setMontantReste($event, 'REDUCTION')"  formControlName="command_montant_reduction">
         </div>
       </div>
 
@@ -169,7 +169,7 @@
       <div class="col-md-4">
         <div class="form-group">
           <label for="command_montant_a_compte">À compte</label>
-          <input type="number" class="form-control" (input)="onChangeMontantAcompte($event)" id="command_montant_a_compte" formControlName="command_montant_a_compte">
+          <input type="number" class="form-control" (input)="setMontantReste($event, 'A_COMPTE')" id="command_montant_a_compte" formControlName="command_montant_a_compte">
         </div>
       </div>
 
