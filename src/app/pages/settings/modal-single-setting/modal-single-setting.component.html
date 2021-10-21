@@ -1,0 +1,37 @@
+ <form [formGroup]="fg" (ngSubmit)="fg.valid && onSubmit()">
+  <h4 mat-dialog-title>{{ dialogData ? 'Modification' : 'Création'}}</h4>
+  <ng-container mat-dialog-content>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="param_categories">Catégorie</label>
+          <select name="param_categories" id="param_categories" formControlName="param_categories" class="form-control">
+            <option *ngFor="let c of paramCategories" [value]="c.param_categories">{{c.param_categories}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="param_code">Code</label>
+          <input type="text" name="param_code" id="param_code" formControlName="param_code" class="form-control">
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="param_description">Description</label>
+          <textarea name="param_description" id="param_description" formControlName="param_description" class="form-control"></textarea>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="param_ordre">Ordre</label>
+          <input type="number" name="param_ordre" id="param_ordre" formControlName="param_ordre" class="form-control">
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <div mat-dialog-actions class="pull-right">
+    <button type="button" class="btn btn-sm btn-outline-danger" mat-dialog-close>Annuler</button>
+    <button type="submit" class="btn btn-sm btn-outline-success ml-2" [disabled]="fg.invalid" >Enregistrer</button>
+  </div>
+</form>

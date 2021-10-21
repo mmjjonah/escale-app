@@ -5,14 +5,13 @@
         <div class="row">
           <div class="col-5 col-md-4">
             <div class="icon-big text-center icon-warning">
-              <i class="nc-icon nc-globe text-warning"></i>
+              <i class="nc-icon nc-book-bookmark text-warning"></i>
             </div>
           </div>
           <div class="col-7 col-md-8">
             <div class="numbers">
-              <p class="card-category">Capacity</p>
-              <p class="card-title">150GB
-                <p>
+              <p class="card-category">Commandes</p>
+              <p class="card-title"><p>
             </div>
           </div>
         </div>
@@ -20,7 +19,7 @@
       <div class="card-footer ">
         <hr>
         <div class="stats">
-          <i class="fa fa-refresh"></i> Update Now
+          <span class="fs-20">{{dayData.commandDay}}</span>
         </div>
       </div>
     </div>
@@ -31,14 +30,13 @@
         <div class="row">
           <div class="col-5 col-md-4">
             <div class="icon-big text-center icon-warning">
-              <i class="nc-icon nc-money-coins text-success"></i>
+              <i class="fa fa-birthday-cake text-success"></i>
             </div>
           </div>
           <div class="col-7 col-md-8">
             <div class="numbers">
-              <p class="card-category">Revenue</p>
-              <p class="card-title">$ 1,345
-                <p>
+              <p class="card-category">Gateaux</p>
+              <p class="card-title"><p>
             </div>
           </div>
         </div>
@@ -46,7 +44,7 @@
       <div class="card-footer ">
         <hr>
         <div class="stats">
-          <i class="fa fa-calendar-o"></i> Last day
+          <span class="fs-20">{{dayData.gateauDay}}</span>
         </div>
       </div>
     </div>
@@ -57,14 +55,13 @@
         <div class="row">
           <div class="col-5 col-md-4">
             <div class="icon-big text-center icon-warning">
-              <i class="nc-icon nc-vector text-danger"></i>
+              <i class="nc-icon nc-user-run text-danger"></i>
             </div>
           </div>
           <div class="col-7 col-md-8">
             <div class="numbers">
-              <p class="card-category">Errors</p>
-              <p class="card-title">23
-                <p>
+              <p class="card-category">Clients</p>
+              <p class="card-title"><p>
             </div>
           </div>
         </div>
@@ -72,7 +69,7 @@
       <div class="card-footer ">
         <hr>
         <div class="stats">
-          <i class="fa fa-clock-o"></i> In the last hour
+          <span class="fs-20">{{dayData.clientDay}}</span>
         </div>
       </div>
     </div>
@@ -83,14 +80,13 @@
         <div class="row">
           <div class="col-5 col-md-4">
             <div class="icon-big text-center icon-warning">
-              <i class="nc-icon nc-favourite-28 text-primary"></i>
+              <i class="nc-icon nc-money-coins text-primary"></i>
             </div>
           </div>
           <div class="col-7 col-md-8">
             <div class="numbers">
-              <p class="card-category">Followers</p>
-              <p class="card-title">+45K
-                <p>
+              <p class="card-category">Montants</p>
+              <p class="card-title"><p>
             </div>
           </div>
         </div>
@@ -98,7 +94,7 @@
       <div class="card-footer ">
         <hr>
         <div class="stats">
-          <i class="fa fa-refresh"></i> Update now
+          <span class="fs-20">{{dayData.montantDay | number: '1.2-2':'fr'}} Ar</span>
         </div>
       </div>
     </div>
@@ -111,7 +107,7 @@
     <div class="card card-chart">
       <div class="card-header">
         <h5 class="card-title">COMMANDES</h5>
-        <p class="card-category">- Filtres -</p>
+        <p class="card-category"></p>
         <form class="row" [formGroup]="fgFilterCommand" (submit)="fgFilterCommand.valid && onSubmitFilterCommand()">
           <div class="col-md-5">
             <div class="row">
@@ -142,7 +138,7 @@
     <div class="card card-chart">
       <div class="card-header">
         <h5 class="card-title">GATEAUX</h5>
-        <p class="card-category">- Filtres -</p>
+        <p class="card-category"></p>
         <form class="row" [formGroup]="fgFilterGateau" (submit)="fgFilterGateau.valid && onSubmitFilterGateau()">
           <div class="col-md-5">
             <div class="row">
@@ -167,4 +163,67 @@
       </div>
     </div>
   </div>
+
+  <!-- clients -->
+  <div class="col-md-12">
+    <div class="card card-chart">
+      <div class="card-header">
+        <h5 class="card-title">CLIENTS</h5>
+        <p class="card-category"></p>
+        <form class="row" [formGroup]="fgFilterClient" (submit)="fgFilterClient.valid && onSubmitFilterClient()">
+          <div class="col-md-5">
+            <div class="row">
+              <label class="col-sm-3" for="client_date_du">Date début :</label>
+              <input type="date" formControlName="client_date_du" id="client_date_du" class="form-control form-control-sm col-sm-9">
+            </div>
+          </div>
+          <div class="col-md-5 mb-2">
+            <div class="row">
+              <label class="col-sm-3" for="client_date_au">Date fin :</label>
+              <input type="date" formControlName="client_date_au" id="client_date_au" class="form-control form-control-sm col-sm-9">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <button class="btn-info btn-sm btn-block" type="submit" [disabled]="fgFilterClient?.invalid">Valider</button>
+          </div>
+        </form>
+        <hr>
+      </div>
+      <div class="card-body">
+        <canvas id="clientChart" width="400" height="80"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- paiement -->
+  <div class="col-md-12">
+    <div class="card card-chart">
+      <div class="card-header">
+        <h5 class="card-title">MONTANTS</h5>
+        <p class="card-category"></p>
+        <form class="row" [formGroup]="fgFilterPaiement" (submit)="fgFilterPaiement.valid && onSubmitFilterPaiement()">
+          <div class="col-md-5">
+            <div class="row">
+              <label class="col-sm-3" for="paiement_date_du">Date début :</label>
+              <input type="date" formControlName="paiement_date_du" id="paiement_date_du" class="form-control form-control-sm col-sm-9">
+            </div>
+          </div>
+          <div class="col-md-5 mb-2">
+            <div class="row">
+              <label class="col-sm-3" for="paiement_date_au">Date fin :</label>
+              <input type="date" formControlName="paiement_date_au" id="paiement_date_au" class="form-control form-control-sm col-sm-9">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <button class="btn-danger btn-sm btn-block" type="submit" [disabled]="fgFilterPaiement?.invalid">Valider</button>
+          </div>
+        </form>
+        <hr>
+      </div>
+      <div class="card-body">
+        <canvas id="paiementChart" width="400" height="80"></canvas>
+      </div>
+    </div>
+  </div>
+
 </div>

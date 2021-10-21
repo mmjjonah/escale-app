@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {Router} from '@angular/router';
 import {User} from '../shared/interfaces/user';
 import {SessionService} from '../shared/services/session/session.service';
 import {_c} from '../config/constants';
@@ -20,6 +19,13 @@ export const ROUTES: RouteInfo[] = [
     icon: 'nc-chart-bar-32',
     class: '',
     roles: [ _c.ADMIN ]
+  },
+  {
+    path: '/dashboard/settings',
+    title: 'Paramétrage',
+    icon: 'nc-settings',
+    class: '',
+    roles: [_c.ADMIN]
   },
   {
     path: '/dashboard/account',
@@ -49,18 +55,6 @@ export const ROUTES: RouteInfo[] = [
     class: '',
     roles: [_c.ADMIN]
   },
-  // {
-  //   path: '/dashboard/icons',
-  //   title: 'Icons',
-  //   icon: 'nc-diamond',
-  //   class: '',
-  //   roles: [_c.ADMIN]
-  // },
-  // {path: '/dashboard/maps', title: 'Maps', icon: 'nc-pin-3', class: ''},
-  // {path: '/dashboard/notifications', title: 'Notifications', icon: 'nc-bell-55', class: ''},
-  // {path: '/dashboard/user', title: 'User Profile', icon: 'nc-single-02', class: ''},
-  // {path: '/dashboard/table', title: 'Table List', icon: 'nc-tile-56', class: ''},
-  // {path: '/dashboard/typography', title: 'Typography', icon: 'nc-caps-small', class: ''},
 ];
 
 @Component({
@@ -74,7 +68,6 @@ export class SidebarComponent implements OnInit {
 
   constructor(
     private session$: SessionService,
-    private router: Router,
     public dialogRef: MatDialog
   ) {
   }

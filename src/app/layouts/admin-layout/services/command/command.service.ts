@@ -50,10 +50,15 @@ export class CommandService {
 
   chart(params: {
     date_du: string,
-    date_au: string
+    date_au: string,
+    type?: string
   }): Observable<ApiRes> {
     return this.http.get<ApiRes>(api.api_url + endpoints.command_widget.chart, {
       params
     })
+  }
+
+  getDayData(): Observable<ApiRes> {
+    return this.http.get<ApiRes>(api.api_url + endpoints.command_widget.dayData );
   }
 }
