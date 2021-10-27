@@ -63,7 +63,7 @@ export class CommandComponent implements OnInit, OnDestroy, AfterViewInit {
         .subscribe((res) => {
           if (res.status === StatusCodes.OK) {
             this.toast$.info('Bon de commande', res.message)
-            this.tools$.downloadBase64File(mimes.PDF, res.data, `bon-de-commande-${formatDate(new Date, 'yyyy-MM-dd-H-mm-ss', 'fr')}`)
+            this.tools$.downloadBase64File(mimes.PDF, res.data, `BC_${formatDate(new Date, 'yyyy_MM_dd_hh_mm_ss', 'fr')}`)
             this.tools$.hideSpinner()
           }
         })
