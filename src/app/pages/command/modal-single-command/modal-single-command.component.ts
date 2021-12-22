@@ -147,7 +147,9 @@ export class ModalSingleCommandComponent implements OnInit, OnDestroy {
       command_date_livraison: new FormControl('', [Validators.required]),
       command_heure_livraison: new FormControl('', [Validators.required]),
       command_evenement: new FormControl('', [Validators.required]),
-      command_montant_a_compte: new FormControl('', []),
+      command_accessoire: new FormControl(0, []),
+      command_montant_reduction: new FormControl(0, []),
+      command_montant_a_compte: new FormControl(0, []),
       command_type: new FormControl(this.command_type, []),
       gateaux: new FormControl('', [Validators.required]),
     })
@@ -165,7 +167,9 @@ export class ModalSingleCommandComponent implements OnInit, OnDestroy {
         command_date_livraison: formatDate(this.commandData.command_date_livraison, 'yyyy-MM-dd', 'fr'),
         command_heure_livraison: formatDate(this.commandData.command_date_livraison, 'H:mm', 'fr'),
         command_lieu_livraison: this.commandData.command_lieu_livraison,
+        command_accessoire: this.commandData.command_accessoire,
         command_evenement: this.commandData.command_evenement,
+        command_montant_reduction: this.commandData.command_montant_reduction,
         command_montant_a_compte: this.commandData.command_montant_a_compte,
         gateaux: this.commandData.gateaux,
       })

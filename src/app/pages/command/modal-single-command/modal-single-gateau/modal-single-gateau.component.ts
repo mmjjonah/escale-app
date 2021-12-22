@@ -87,17 +87,17 @@ export class ModalSingleGateauComponent implements OnInit, OnDestroy {
     this.fg = new FormGroup({
       gateau_id: new FormControl('new__' + uniqueId, [Validators.required]),
       gateau_nb_pax: new FormControl('', [Validators.required]),
-      gateau_form_param_fk: new FormControl('', [Validators.required]),
-      gateau_type_param_fk: new FormControl('', [Validators.required]),
+      gateau_form_param_fk: new FormControl(null),
+      gateau_type_param_fk: new FormControl(null),
       gateau_decoration: new FormControl('', [Validators.required]),
       gateau_model: new FormControl('', []),
       gateau_arome_special: new FormControl('', []),
-      gateau_piece_montee: new FormControl('', []),
-      gateau_layercake: new FormControl('', []),
-      gateau_dripcake: new FormControl('', []),
-      gateau_message: new FormControl('', [Validators.required]),
+      gateau_piece_montee: new FormControl(0, []),
+      gateau_layercake: new FormControl(0, []),
+      gateau_dripcake: new FormControl(0, []),
+      gateau_message: new FormControl(''),
       gateau_observation: new FormControl('', [Validators.required]),
-      gateau_montant_unitaire: new FormControl('', []),
+      gateau_montant_unitaire: new FormControl(0, []),
       gateau_montant_total: new FormControl('', [Validators.required])
     })
 

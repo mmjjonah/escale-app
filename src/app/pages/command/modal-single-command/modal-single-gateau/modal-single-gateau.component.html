@@ -1,4 +1,4 @@
-<h4 mat-dialog-title>Création gateau</h4>
+<h4 mat-dialog-title>Création gâteau et ajout d'accessoires</h4>
 <form [formGroup]="fg" (submit)="fg.valid && onSubmit()">
   <ng-container mat-dialog-content>
     <div class="row">
@@ -17,12 +17,11 @@
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <label for="gateau_form_param_fk">Forme *</label>
+          <label for="gateau_form_param_fk">Forme</label>
           <select
             id="gateau_form_param_fk"
             class="form-control"
             formControlName="gateau_form_param_fk"
-            [ngClass]="{'input-danger': fg.get('gateau_form_param_fk').invalid && fg.get('gateau_form_param_fk').touched}"
           >
             <option *ngFor="let form of listForm" [value]="form.param_id">{{form.param_description}}</option>
           </select>
@@ -30,12 +29,11 @@
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <label for="gateau_type_param_fk">Type *</label>
+          <label for="gateau_type_param_fk">Type</label>
           <select
             id="gateau_type_param_fk"
             class="form-control"
             formControlName="gateau_type_param_fk"
-            [ngClass]="{'input-danger': fg.get('gateau_type_param_fk').invalid && fg.get('gateau_type_param_fk').touched}"
           >
             <option *ngFor="let type of listType" [value]="type.param_id">{{type.param_description}}</option>
           </select>
@@ -80,14 +78,13 @@
 
       <div class="col-md-12">
         <div class="form-group">
-          <label for="gateau_message">Message *</label>
+          <label for="gateau_message">Message</label>
           <input
             type="text"
             id="gateau_message"
             class="form-control"
             placeholder="Message"
             formControlName="gateau_message"
-            [ngClass]="{'input-danger': fg.get('gateau_message').invalid && fg.get('gateau_message').touched}"
           >
         </div>
       </div>
