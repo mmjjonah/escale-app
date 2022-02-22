@@ -1,6 +1,4 @@
-// @ts-ignore
-import {API_URL} from 'assets/config.json';
-
+const API_URL = window.location.hostname;
 export const api = {
-  api_url: API_URL ? API_URL : 'http://localhost:3000'
+  api_url: API_URL ? 'http://' + API_URL + ':3000' : 'http://localhost:3000'
 };
